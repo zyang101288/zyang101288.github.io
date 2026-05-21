@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>乐天API测试</title>
+<meta charset="utf-8">
+<title>乐天API 成功版</title>
 </head>
 <body>
-    <h1>乐天商品搜索测试</h1>
-    <pre id="result">正在加载...</pre>
+<h1>乐天商品検索</h1>
+<pre id="result">読み込み中...</pre>
 
-    <script>
-        const APP_ID = "d6c08dcb-ca2f-40ff-96ff-a22c402f5a98";
-        const API = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706";
+<script>
+const APP_ID = "d6c08dcb-ca2f-40ff-96ff-a22c402f5a98";
+const PROXY = "https://api.allorigins.win/raw?url=";
+const API = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706";
 
-        fetch(`${API}?applicationId=${APP_ID}&keyword=ダンス服&hits=5`)
-        .then(r => r.json())
-        .then(data => {
-            document.getElementById("result").textContent = JSON.stringify(data, null, 2);
-        })
-        .catch(e => {
-            document.getElementById("result").textContent = "错误：" + e;
-        });
-    </script>
+const url = PROXY + encodeURIComponent(
+  API + "?applicationId=" + APP_ID + "&keyword=ダンス服&hits=5"
+);
+
+fetch(url)
+.then(res => res.json())
+.then(data => {
+  document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+})
+.catch(err => {
+  document.getElementById("result").textContent = "ERROR: " + err;
+});
+</script>
 </body>
 </html>
