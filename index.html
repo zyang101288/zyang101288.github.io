@@ -2,10 +2,24 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Rakuten API Test</title>
+    <title>乐天API测试</title>
 </head>
 <body>
-    <h1>Rakuten API Test Page</h1>
-    <p>This site is registered for Rakuten API.</p>
+    <h1>乐天商品搜索测试</h1>
+    <pre id="result">正在加载...</pre>
+
+    <script>
+        const APP_ID = "d6c08dcb-ca2f-40ff-96ff-a22c402f5a98";
+        const API = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706";
+
+        fetch(`${API}?applicationId=${APP_ID}&keyword=ダンス服&hits=5`)
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(e => {
+            document.getElementById("result").textContent = "错误：" + e;
+        });
+    </script>
 </body>
 </html>
